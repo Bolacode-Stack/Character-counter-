@@ -33,16 +33,16 @@
 
 /* @layer tablet; */
 
-body {
+.dark-moon {
       font-family: "DM Sans";
       padding-block: calc(var(--space-sm) - 0.375rem);
       background: url(/Assets/images/bg-dark-theme.png);
-}
+};
 
 .dark-theme {
-      background: url(/Assets/images/bg-light-theme.png);
-}
-
+  color: var(--white);
+}  
+      
 /* colors */
 :root {
       --white: #ffffff;
@@ -86,7 +86,7 @@ body {
             grid-template-columns: 0.1rem repeat(4, calc( (100% - 20px - 1rem * 4) / 4)) 1rem;
       }
       
-      .moon {
+      #logo {
       height: 30px;
       width: 184.4px;
       grid-column: 2;
@@ -110,7 +110,7 @@ body {
       justify-content: center;
 }
 
-.sun {
+.theme {
       width: 20px;
       height: 20px;
 }
@@ -179,10 +179,6 @@ input[type="checkbox"]  {
       accent-color: var(--deep-purple);
 }
 
-input[type="checkbox"]:checked {
-      border-color: var(--orange-2);
-}
-
 .checkbox-contents > label {
       font-weight: 400;
       color: var(--white);
@@ -201,7 +197,7 @@ input[type="checkbox"]:checked {
       font-size: var(--reg);
       margin-left: var(--radius);
       background-color: inherit;
-      border-radius: var(--radius);
+      border-radius: 10px;
       border-color: var(--neutral-600);
       letter-spacing: var(--reg-space);
 }
@@ -232,6 +228,7 @@ input[type="checkbox"]:checked {
 
 .box:nth-child(2)  {
       display: flex;
+      height: 100%;
       margin-block: 1rem;
       justify-content: space-between;
       background-color: var(--yellow);
@@ -288,12 +285,13 @@ input[type="checkbox"]:checked {
       display: flex;
       text-align: left;
       cursor: pointer;
-      font-weight: 500;
       color: var(--grey-2);
       font-family: inherit;
       align-items: center;
       background-color: inherit;
+      font-weight: var(--font-regular);
       column-gap: calc(var(--reg) / 2);
+      letter-spacing: var(--reg-space);
 };
 
 .progress-wrapper {
@@ -336,6 +334,66 @@ input[type="checkbox"]:checked {
 }
 }
 
+/* light theme */
+      .light-theme {
+         background: url(/Assets/images/bg-light-theme.png);
+                  
+             &  .heading {
+            color: var(--neutral-900);
+      }
+
+      & .theme-switcher {
+            background-color: var(--grey);
+      }
+
+      & .character-input {
+            color: var(--neutral-700);
+            border: 2px solid var(--grey-2);
+            background-color: var(--grey);
+
+            &::placeholder {
+                  color: var(--neutral-700)
+            }
+      }
+
+     &  .checkbox-contents > * {
+            color: var(--neutral-900);
+      }
+
+      & input[type="checkbox"] {
+            border-color: var(--neutral-900);
+      }
+
+      & .reading > p {
+            color: var(--neutral-900)
+      }
+
+      & .letter-density > h1 {
+            color: var(--neutral-900);
+      }
+
+      & .letter-density > p {
+            color: var(--neutral-600);
+      }
+
+      & .progress-bars > * {
+            color: var(--neutral-900);
+      }
+
+      & .progress {
+            background-color: var(--grey);
+      }
+      
+      & .letter {
+            color: var(--neutral-900);
+      }
+      
+      & .see {
+            color: var(--neutral-900);
+      }
+}
+
+/* Tablet styles */
 @layer tablet {
       @media(width >= 48em)  {
       .character-grid {
@@ -404,5 +462,9 @@ input[type="checkbox"]:checked {
       .character-input {
             width: 100%;
             grid-column: 2 / -2;
+      }
+
+      .box {
+            height: 100%
       }
 };

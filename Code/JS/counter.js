@@ -14,7 +14,8 @@ const icon = document.querySelector(".fa-solid")
 const bar = document.querySelectorAll(".bar");
 const themeSwitcher = document.querySelector(".theme-switcher");
 const body = document.querySelector("body");
-console.log(body.classList)
+const logo = document.querySelector("#logo");
+const theme = document.querySelector(".theme");
 
 let boolean = true;
 let zero = 0, time = 50, second = 1000;
@@ -27,9 +28,16 @@ setLimit.addEventListener("change", (event)  =>  {
     }
 });
 
-themeSwitcher.addEventListener("click", ()  =>  {
-    body.classList.toggle("dark-theme")
-})
+theme.addEventListener("click", (event)  =>  {    
+    body.classList.toggle("light-theme");
+    if (body.classList.contains('light-theme'))  {
+        logo.src ="/Assets/images/logo-light-theme.svg"; 
+        theme.src = "/Assets/images/icon-moon.svg";
+    } else {
+        logo.src ="/Assets/images/logo-dark-theme.svg"; 
+        theme.src = "/Assets/images/icon-sun.svg";
+    }
+});
 
 export function getContents()  {
     let contents = [];
