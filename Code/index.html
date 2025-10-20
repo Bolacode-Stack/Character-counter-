@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Counter | Analyze your text in real-time</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./character.css">
+</head>
+<body class="dark-theme">
+    <nav class="nav character-grid">
+        <img src="/Assets/images/logo-dark-theme.svg" alt="" class="moon">
+        <div class="theme-switcher">
+            <img src="/Assets/images/icon-sun.svg" alt="" class="sun">
+        </div>
+    </nav>
+    <main class="character-grid main">
+        <div class="showcase">
+                <h1 class="heading">Analyze your text in real-time</h1>
+            <textarea name="" placeholder="Start typing here... (or paste some text)"  id="" class="character-input"></textarea>
+            <div class="showcase-data">
+                <!-- (1) -->
+                <div class="checkbox-contents">
+                    <input type="checkbox" class="spaces">
+                    <label for="">exclude spaces</label>
+                </div>
+                <!-- (2) -->
+                 <div class="checkbox-contents">
+                    <input type="checkbox" class="checkbox" id="set-limit">
+                    <label for="">set character limit</label>
+                    <input type="text" placeholer="300" class="limit-count">
+                </div>
+                <div class="reading">
+                    <p class="">Approx. reading time: <span class="reading-time">1 minute</span></p>
+                </div>
+            </div>
+        </div>
+        </main>
+
+        <section class="character-grid character-data">
+            <div class="boxes">
+                <!-- (1) -->
+                <div class="box">
+                    <div class="box-contents">
+                        <h1 id="total-characters">00</h1>
+                        <p>total characters</p>
+                    </div>
+                    <img src="/Assets/images/pattern-character-count.svg" alt="" class="pattern">
+                </div>
+                       <div class="box">
+                        <div class="box-contents">
+                            <h1 class="word-count">00</h1>
+                            <p>word count</p>
+                        </div>
+                        <img src="/Assets/images/pattern-word-count.svg" alt="">
+                </div>
+                       <div class="box">
+                        <div class="box-contents">
+                            <h1 class="sentence-count">00</h1>
+                        <p>sentence count</p>    
+                        </div>
+                        <img src="/Assets/images/pattern-sentence-count.svg" alt="">
+                </div>
+            </div>
+        </section>
+
+        <section class="character-grid letter-density">
+            <div class="stats">
+                <div class="letter-density">
+                    <h1 class="">Letter Density</h1>
+                    <p>No characters found. Start typing to see letter density.</p>
+                </div>
+
+                <div class="contents">
+                    <div class="progress-wrapper">
+                    <div class="progress-bars">
+                        <div>
+                            <p class="letters">A</p>
+                        </div>
+                        <div class="progress">
+                            <div class="bar"></div>
+                        </div>
+                        <p class="stats">60(36.06%)</p>
+                    </div>
+                    
+                    <!-- B -->
+            <div class="progress-bars">
+                <div>
+                        <p>B</p>
+                    </div>
+                    <div class="progress">
+                        <div class="bar"></div>
+                    </div>
+                    <p>40(20.06%)</p>
+                </div>
+                
+                <!-- C -->
+                <div class="progress-bars">
+                    <div>
+                        <p>C</p>
+                    </div>
+                    <div class="progress">
+                        <div class="bar c" width=""></div>
+                    </div>
+                    <p>25(10.06%)</p>
+                </div>
+
+                          <div class="progress-bars">
+                    <div>
+                        <p>D</p>
+                    </div>
+                    <div class="progress">
+                        <div class="bar" width=""></div>
+                    </div>
+                    <p>25(10.06%)</p>
+                </div>
+
+                          <div class="progress-bars">
+                    <div>
+                        <p>E</p>
+                    </div>
+                    <div class="progress">
+                        <div class="bar" width=""></div>
+                    </div>
+                    <p>25(10.06%)</p>
+                </div>
+
+                          <div class="progress-bars">
+                    <div>
+                        <p>F</p>
+                    </div>
+                    <div class="progress">
+                        <div class="bar" width=""></div>
+                    </div>
+                    <p>25(10.06%)</p>
+                </div>
+
+                          <div class="progress-bars">
+                    <div>
+                        <p>G</p>
+                    </div>
+                    <div class="progress">
+                        <div class="bar" width=""></div>
+                    </div>
+                    <p>25(10.06%)</p>
+                </div>
+
+                        <div class="progress-bars">
+                    <div>
+                        <p>H</p>
+                    </div>
+                    <div class="progress">
+                        <div class="bar" width=""></div>
+                    </div>
+                    <p>25(10.06%)</p>
+                </div>
+
+                        <div class="progress-bars">
+                    <div>
+                        <p>I</p>
+                    </div>
+                    <div class="progress">
+                        <div class="bar" width=""></div>
+                    </div>
+                    <p>25(10.06%)</p>
+                </div>
+
+                        <div class="progress-bars">
+                    <div>
+                        <p>J</p>
+                    </div>
+                    <div class="progress">
+                        <div class="bar" width=""></div>
+                    </div>
+                    <p>25(10.06%)</p>
+                </div>
+
+            </div>
+            <button class="see more-less">See More<i class="fa-solid fa-chevron-down"></i></button>
+        </div>
+    </div>
+    
+</section>
+        <script src="/Code/JS/alphabet.js" type="module"></script>
+        <script src="/Code/JS/counter.js" type="module"></script>
+    </body>
+    </html>
