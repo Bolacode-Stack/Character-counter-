@@ -298,8 +298,8 @@ input[type="checkbox"] {
 }
 
 .progress-wrapper {
-  height: 0;
-  overflow: hidden;
+  /* height: 0;
+  overflow: hidden; */
   transition: height 600ms ease-in-out;
 }
 

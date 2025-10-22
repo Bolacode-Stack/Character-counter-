@@ -118,7 +118,7 @@ export function letterCount(char) {
   let contents = getCharacters();
   for (let string of contents) {
     for (let i = 0; i < string.length; i++) {
-      if (string[i] == char.toLowerCase()) {
+      if (string[i] == char) {
         counted += 1;
       }
     }
