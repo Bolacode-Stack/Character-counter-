@@ -66,7 +66,7 @@ function countWords() {
   }
 }
 
-function countChar(count) {
+export function countChar(count) {
   let totalCount = zero;
   let contents = getCharacters();
   for (let content of contents) {
@@ -92,6 +92,11 @@ function sentenceCount(char) {
     sentence.innerText = count += 1;
     if (count == fullStop) {
       clearInterval(timerID);
+      
+      if (fullStop == null)  {
+          count = 0;
+          sentence.innerText = "00";
+        }
     }
   });
   return fullStop;
@@ -122,7 +127,7 @@ export function letterCount(char) {
 }
 
 output = letterCount(".");
-console.log(output);
+// console.log(output);
 
 // Toggle letter density graph
 toggle.addEventListener("click", () => {
@@ -141,5 +146,5 @@ toggle.addEventListener("click", () => {
 window.onload = () => {
   countChar();
   countWords();
-  sentenceCount(".");
+//   sentenceCount(".");
 };

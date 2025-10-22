@@ -138,7 +138,6 @@ p {
   min-height: 200px;
   font-family: inherit;
   letter-spacing: -0.6px;
-  /* border-radius: 20px; */
   border-radius: var(--radius);
   border: 2px solid var(--neutral-700);
   font-size: calc(var(--reg) + 0.25rem);
@@ -316,16 +315,18 @@ input[type="checkbox"] {
   height: var(--radius);
   border-radius: var(--corner-full);
   background-color: var(--neutral-800);
+}
 
-  & .bar {
-    width: 70%;
+ .bar {
     position: absolute;
     height: var(--radius);
     border-radius: var(--corner-full);
     background-color: var(--light-purple);
+  }
+  
+  .smooth {
     transition: width 800ms ease-in-out;
   }
-}
 
 /* light theme */
 .light-theme {
