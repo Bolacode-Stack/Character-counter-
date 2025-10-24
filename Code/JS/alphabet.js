@@ -5,68 +5,81 @@ import { getCharacters } from "./counter.js";
 let logout;
 const progressWrapper = document.querySelector(".progress-wrapper");
 
-function alphabetStats(alphabet) {
-  let progressBars = document.createElement("div");
-  progressBars.className = "progress-bars";
+let graph = [
+  { alphabet: "a", count: 0 },
+  { alphabet: "b", count: 0 },
+  { alphabet: "c", count: 0 },
+  { alphabet: "d", count: 0 },
+  { alphabet: "e", count: 0 },
+  { alphabet: "f", count: 0 },
+  { alphabet: "g", count: 0 },
+  { alphabet: "h", count: 0 },
+  { alphabet: "i", count: 0 },
+  { alphabet: "j", count: 0 },
+  { alphabet: "k", count: 0 },
+  { alphabet: "l", count: 0 },
+  { alphabet: "m", count: 0 },
+  { alphabet: "n", count: 0 },
+  { alphabet: "o", count: 0 },
+  { alphabet: "p", count: 0 },
+  { alphabet: "q", count: 0 },
+  { alphabet: "r", count: 0 },
+  { alphabet: "s", count: 0 },
+  { alphabet: "t", count: 0 },
+  { alphabet: "u", count: 0 },
+  { alphabet: "v", count: 0 },
+  { alphabet: "w", count: 0 },
+  { alphabet: "x", count: 0 },
+  { alphabet: "y", count: 0 },
+  { alphabet: "z", count: 0 },
+];
 
-  // (1)
-  let div = document.createElement("div");
-  let p = document.createElement("p");
-  p.textContent = alphabet.toUpperCase();
-  p.className = "letter";
-  div.appendChild(p);
+function alphabetStats(object) {
+  let items = [];
 
-  // (2)
-  let progress = document.createElement("div");
-  progress.className = "progress";
-  let bar = document.createElement("div");
-  bar.className = "bar";
-  bar.classList.add("smooth");
-  console.log(bar);
+  object.forEach((brace) => {
+    let progressBars = document.createElement("div");
+    progressBars.className = "progress-bars";
 
-  bar.style.width = `${getPercentage(alphabet)}%`;
-  console.log(bar.style.width);
-  progress.appendChild(bar);
+    let div = document.createElement("div");
+    let paragragh = document.createElement("p");
+    paragragh.innerText = brace.alphabet.toUpperCase();
+    paragragh.className = "alphabet";
+    div.appendChild(paragragh);
 
-  // (3)
-  let unit = letterCount(alphabet);
-  let letterStats = document.createElement("div");
-  letterStats.className = "letter-stats";
-  letterStats.textContent = `${unit}(${getPercentage(alphabet).toFixed(2)}%)`;
+    // (2)
+    let progress = document.createElement("div");
+    progress.className = "progress";
 
-  progressBars.appendChild(div);
-  progressBars.appendChild(progress);
-  progressBars.appendChild(letterStats);
-  return progressBars;
+    let bar = document.createElement("div");
+    bar.className = "bar";
+    bar.style.width = `${brace.count}%`;
+    progress.appendChild(bar);
+
+    let totalCount = object.reduce((combine, { count }) => {
+      return combine + count;
+    }, 0);
+
+    let percentage = brace["count"];
+    let letterStats = document.createElement("div");
+    letterStats.className = "letter-stats";
+    percentage = (brace.count / totalCount) * 100;
+    letterStats.innerText = `${brace.count }(${percentage.toFixed(2)})%`;
+
+    console.log(percentage.toFixed(2));
+
+    progressBars.appendChild(div);
+    progressBars.appendChild(progress);
+    progressBars.appendChild(letterStats);
+    progressWrapper.appendChild(progressBars);
+  });
 }
 
-function getPercentage(alphabet) {
-  let amount = countChar();
-  let unit = letterCount(alphabet);
-  let percentage = (unit / amount) * 100;
-  return percentage;
-}
+alphabetStats(letterDensity(graph));
 
-class Alphabet {
-  constructor() {
-    this.letterDensityGraph();
-  }
-
-  a(character = "h") {
-    let count = countChar();
-    let found = getCharacters();
-    let aStats = alphabetStats(character, count);
-
-    found.forEach((alphabet) => {
-      if (alphabet.indexOf(alphabet) != -1) {
-        progressWrapper.appendChild(aStats);
-      } 
-    });
-  }
-
-  letterDensityGraph() {
-    this.a();
-  }
+function letterDensity(object) {
+  object.forEach((brace)  => {
+    brace["count"] = letterCount(brace.alphabet);
+  });
+  return object.sort((a, b) => a.count < b.count);
 };
-
-const app = new Alphabet();

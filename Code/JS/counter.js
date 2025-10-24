@@ -146,5 +146,5 @@ toggle.addEventListener("click", () => {
 window.onload = () => {
   countChar();
   countWords();
-//   sentenceCount(".");
+  // sentenceCount(".");
 };
