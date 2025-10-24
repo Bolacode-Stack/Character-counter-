@@ -25,8 +25,9 @@ let string = ["Analyze your text in real-time"];
 let regex = /\w+/g;
 
 setLimit.addEventListener("change", (event) => {
-  if (setLimit.checked) {
-    console.log(parseInt(limit.value));
+  let totalCharacters = countChar();
+  if (parseInt(limit.value) >= totalCharacters) {
+    characterInput.classList.add("limit");
   }
 });
 
@@ -92,11 +93,11 @@ function sentenceCount(char) {
     sentence.innerText = count += 1;
     if (count == fullStop) {
       clearInterval(timerID);
-      
-      if (fullStop == null)  {
-          count = 0;
-          sentence.innerText = "00";
-        }
+
+      if (fullStop == null) {
+        count = 0;
+        sentence.innerText = "00";
+      }
     }
   });
   return fullStop;
@@ -129,19 +130,26 @@ export function letterCount(char) {
 output = letterCount(".");
 // console.log(output);
 
-// Toggle letter density graph
-toggle.addEventListener("click", () => {
-  if (parseInt(wrapper.style.height) != wrapper.scrollHeight) {
+function toggleGraph() {
+  if (parseInt(wrapper.style.height) !== wrapper.scrollHeight) {
     wrapper.style.height = wrapper.scrollHeight + "px";
     icon.classList.remove("fa-chevron-down");
     icon.classList.add("fa-chevron-up");
-    console.log(wrapper.style.height);
-  } else {
+  } else if ((wrapper.style.height = wrapper.scrollHeight)) {
     icon.classList.remove("fa-chevron-up");
     icon.classList.add("fa-chevron-down");
     wrapper.style.height = "200px";
+    console.log(wrapper.style.height);
+  } else if (wrapper.style.height === "0px") {
+    wrapper.style.height = "0px";
+    icon.classList.remove("fa-chevron-up");
+    icon.classList.add("fa-chevron-down");
+    toggle.removeEventListener("click", toggleGraph);
+    console.log("No more toggling", wrapper.style.height);
   }
-});
+}
+
+toggle.addEventListener("click", toggleGraph);
 
 window.onload = () => {
   countChar();

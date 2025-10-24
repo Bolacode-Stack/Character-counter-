@@ -35,17 +35,22 @@ let graph = [
 ];
 
 function alphabetStats(object) {
-  let items = [];
+  let bars = [];
 
-  object.forEach((brace) => {
+  let filteredGraph = object.filter((character)  => {
+    return character.count !== 0;
+  });
+
+  filteredGraph.forEach((brace) => {
     let progressBars = document.createElement("div");
     progressBars.className = "progress-bars";
 
     let div = document.createElement("div");
-    let paragragh = document.createElement("p");
-    paragragh.innerText = brace.alphabet.toUpperCase();
-    paragragh.className = "alphabet";
-    div.appendChild(paragragh);
+    let letter = document.createElement("p");
+    letter.className = "alphabet";
+    letter.innerText = brace.alphabet.toUpperCase();
+    // console.log(letter.innerText)
+    div.appendChild(letter);
 
     // (2)
     let progress = document.createElement("div");
@@ -56,19 +61,17 @@ function alphabetStats(object) {
     bar.style.width = `${brace.count}%`;
     progress.appendChild(bar);
 
+    // (3)
     let totalCount = object.reduce((combine, { count }) => {
       return combine + count;
     }, 0);
 
-    let percentage = brace["count"];
+    let percentage = (brace.count / totalCount) * 100;
+
     let letterStats = document.createElement("div");
     letterStats.className = "letter-stats";
-    percentage = (brace.count / totalCount) * 100;
-    letterStats.innerText = `${brace.count }(${percentage.toFixed(2)})%`;
+    letterStats.innerText = `${brace.count}(${percentage.toFixed(2)})%`;
 
-    console.log(percentage.toFixed(2));
-
-    progressBars.appendChild(div);
     progressBars.appendChild(progress);
     progressBars.appendChild(letterStats);
     progressWrapper.appendChild(progressBars);
@@ -78,8 +81,8 @@ function alphabetStats(object) {
 alphabetStats(letterDensity(graph));
 
 function letterDensity(object) {
-  object.forEach((brace)  => {
+  object.forEach((brace) => {
     brace["count"] = letterCount(brace.alphabet);
   });
   return object.sort((a, b) => a.count < b.count);
-};
+}

@@ -156,6 +156,31 @@ p {
   }
 }
 
+.limit {
+  border: 1px solid var(--orange)
+}
+
+.limit-reached {
+  display: flex;
+  align-items: baseline;
+  justify-content: start;
+  margin-top: var(--radius);
+  column-gap: calc(var(--reg) / 2);
+}
+
+.limit-reached > img {
+  align-self: center;
+}
+
+.limit-reached > * {
+  font-size: var(--reg);
+  color:  var(--orange);
+}
+
+.limit-reached > P {
+  width: 100%;
+}
+
 .showcase-data {
   margin-block-start: var(--reg);
 }
