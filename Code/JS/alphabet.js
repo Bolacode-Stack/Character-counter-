@@ -1,6 +1,4 @@
-import { letterCount } from "./counter.js";
-import { countChar } from "./counter.js";
-import { getCharacters } from "./counter.js";
+import { alphabetCounter } from "./counter.js";
 
 let logout;
 const progressWrapper = document.querySelector(".progress-wrapper");
@@ -37,7 +35,7 @@ let graph = [
 function alphabetStats(object) {
   let bars = [];
 
-  let filteredGraph = object.filter((character)  => {
+  let filteredGraph = object.filter((character) => {
     return character.count !== 0;
   });
 
@@ -49,7 +47,6 @@ function alphabetStats(object) {
     let letter = document.createElement("p");
     letter.className = "alphabet";
     letter.innerText = brace.alphabet.toUpperCase();
-    // console.log(letter.innerText)
     div.appendChild(letter);
 
     // (2)
@@ -59,6 +56,7 @@ function alphabetStats(object) {
     let bar = document.createElement("div");
     bar.className = "bar";
     bar.style.width = `${brace.count}%`;
+    bar.classList.add("smooth");
     progress.appendChild(bar);
 
     // (3)
@@ -70,19 +68,26 @@ function alphabetStats(object) {
 
     let letterStats = document.createElement("div");
     letterStats.className = "letter-stats";
-    letterStats.innerText = `${brace.count}(${percentage.toFixed(2)})%`;
 
-    progressBars.appendChild(progress);
-    progressBars.appendChild(letterStats);
+    let stats = 0;
+    let timerID = setInterval(() => {
+      letterStats.innerText = `${stats++}(${percentage.toFixed(2)})`;
+
+      if (stats == brace.count) {
+        clearInterval(timerID);
+      }
+    }, 200);
+
+    progressBars.append(div, progress, letterStats);
     progressWrapper.appendChild(progressBars);
   });
 }
 
-alphabetStats(letterDensity(graph));
-
-function letterDensity(object) {
+function letterDensity(object)  {
   object.forEach((brace) => {
-    brace["count"] = letterCount(brace.alphabet);
+    brace["count"] = alphabetCounter(brace.alphabet);
   });
   return object.sort((a, b) => a.count < b.count);
 }
+
+alphabetStats(letterDensity(graph));

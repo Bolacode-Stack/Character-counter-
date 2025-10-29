@@ -24,16 +24,16 @@
       <div class="showcase">
         <h1 class="heading">Analyze your text in real-time</h1>
         <textarea
-          name=""
+          name="input" 
+          for="characters"
           placeholder="Start typing here... (or paste some text)"
-          id=""
           class="character-input"
         ></textarea>
         <!-- limit  -->
         <div class="limit-reached">
             <img src="/Assets/images/icon-info.svg" alt="" />
             <p class="">
-              Limit reached! Your text exceeds 300 characters.
+              Limit reached! Your text exceeds 50 characters.
           </p>
         </div>
         <div class="showcase-data">
@@ -44,9 +44,9 @@
           </div>
           <!-- (2) -->
           <div class="checkbox-contents">
-            <input type="checkbox" class="checkbox" id="set-limit" />
+            <input type="checkbox" class="checkbox" id="limit-checkbox" />
             <label for="">set character limit</label>
-            <input type="text" placeholer="300" class="limit-count" />
+            <input type="text" placeholder="" class="limit-count" />
           </div>
           <div class="reading">
             <p class="">
@@ -62,7 +62,7 @@
         <!-- (1) -->
         <div class="box">
           <div class="box-contents">
-            <h1 id="total-characters">00</h1>
+            <h1 id="total-characters">0</h1>
             <p>total characters</p>
           </div>
           <img
@@ -94,7 +94,7 @@
           <h1 class="">Letter Density</h1>
           <p>No characters found. Start typing to see letter density.</p>
         </div>
-
+        
         <div class="contents">
           <div class="progress-wrapper"></div>
           <button class="see more-less">
