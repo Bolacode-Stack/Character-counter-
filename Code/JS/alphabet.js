@@ -1,8 +1,5 @@
-import { wrapper, statsParagraph } from "./counter.js";
 import { alphabetCounter } from "./counter.js";
-
-let logout;
-const progressWrapper = document.querySelector(".progress-wrapper");
+import { icon, toggle, wrapper, statsParagraph } from "./counter.js";
 
 let graph = [
   { alphabet: "a", count: 0 },
@@ -80,18 +77,18 @@ function alphabetStats(object) {
     }, 200);
 
     progressBars.append(div, progress, letterStats);
-    let appended = progressWrapper.appendChild(progressBars);
+    let appended = wrapper.appendChild(progressBars);
 
     setTimeout(() => {
       if (appended) {
-        wrapper.classList.add("show");
-        statsParagraph.classList.add("hide")
+        wrapper.classList.add("height-limit");
+        statsParagraph.classList.add("hide");
       } else if (!appended) {
-        wrapper.classList.remove("show");
-        statsParagraph.classList.remove("hide")
+        wrapper.classList.remove("height-limit");
+        statsParagraph.classList.remove("hide");
       }
     }, 1000);
-    });
+  });
 }
 
 function letterDensity(object) {
@@ -102,3 +99,21 @@ function letterDensity(object) {
 }
 
 alphabetStats(letterDensity(graph));
+
+function toggleGraph()  {
+  if (parseInt(wrapper.style.height) !== wrapper.scrollHeight) {
+    wrapper.style.height = wrapper.scrollHeight + "px";
+    icon.classList.remove("fa-chevron-down");
+    icon.classList.add("fa-chevron-up");
+  } else if ((wrapper.style.height = wrapper.scrollHeight)) {
+    icon.classList.remove("fa-chevron-up");
+    icon.classList.add("fa-chevron-down");
+    wrapper.style.height = "200px";
+    console.log(wrapper.style.height);
+  } else if (wrapper.style.height === "0px") {
+    wrapper.style.height = "0px";
+    toggle.removeEventListener("click", toggleGraph);
+  }
+}
+
+toggle.addEventListener("click", toggleGraph);

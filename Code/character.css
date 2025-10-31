@@ -338,18 +338,13 @@ input[type="checkbox"] {
   transition: height 600ms ease-in-out;
 }
 
-.show {
+.height-limit {
   height: 200px;
 }
 
 .alphabet,
 .stats {
   font-size: var(--reg);
-}
-
-.alphabet {
-  display: block;
-  color: var(--white);
 }
 
 .progress {
@@ -410,11 +405,11 @@ input[type="checkbox"] {
     color: var(--neutral-900);
   }
 
-  & .letter-density > h1 {
+  & .stats > h1 {
     color: var(--neutral-900);
   }
 
-  & .letter-density > p {
+  & .stats > p {
     color: var(--neutral-600);
   }
 
@@ -426,7 +421,7 @@ input[type="checkbox"] {
     background-color: var(--grey);
   }
 
-  & .letter {
+  & .alphabet {
     color: var(--neutral-900);
   }
 

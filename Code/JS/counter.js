@@ -10,8 +10,8 @@ const wordCount = document.querySelector(".word-count");
 const readingTime = document.querySelector(".reading-time");
 const wrapper = document.querySelector(".progress-wrapper");
 const toggle = document.querySelector(".more-less");
-const icon = document.querySelector(".fa-solid");
 const bar = document.querySelectorAll(".bar");
+const icon = document.querySelector(".fa-solid");
 const themeSwitcher = document.querySelector(".theme-switcher");
 const body = document.querySelector("body");
 const logo = document.querySelector("#logo");
@@ -74,13 +74,11 @@ function countSpace() {
 }
 
 output = countSpace();
-console.log(output);
 
-characterInput.addEventListener("input", (event) => { 
-
-  limitCheckbox.addEventListener("change", (event)  =>  {
-  console.log(event.target.checked)
-})
+characterInput.addEventListener("input", (event) => {
+  limitCheckbox.addEventListener("change", (event) => {
+    console.log(event.target.checked);
+  });
 
   let count = 0;
   let characters = event.target.value;
@@ -137,31 +135,9 @@ export function alphabetCounter(alphabet) {
   return counted;
 }
 
-function toggleGraph() {
-  if (parseInt(wrapper.style.height) !== wrapper.scrollHeight) {
-    wrapper.style.height = wrapper.scrollHeight + "px";
-    icon.classList.remove("fa-chevron-down");
-    icon.classList.add("fa-chevron-up");
-  } else if ((wrapper.style.height = wrapper.scrollHeight)) {
-    icon.classList.remove("fa-chevron-up");
-    icon.classList.add("fa-chevron-down");
-    wrapper.style.height = "200px";
-    console.log(wrapper.style.height);
-  } else if (wrapper.style.height === "0px") {
-    wrapper.style.height = "0px";
-    toggle.removeEventListener("click", toggleGraph);
-  }
-}
-
-toggle.addEventListener("click", toggleGraph);
-
-
 window.onload = () => {
   countWords();
   // sentenceCount(".");
-}
+};
 
-export {
-  wrapper,
-  statsParagraph
-}
+export { icon, toggle, wrapper, statsParagraph };
