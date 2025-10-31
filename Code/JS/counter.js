@@ -8,7 +8,6 @@ const characterInput = document.querySelector(".character-input");
 let totalCharacters = document.querySelector("#total-characters");
 const wordCount = document.querySelector(".word-count");
 const readingTime = document.querySelector(".reading-time");
-const container = document.querySelector(".contents");
 const wrapper = document.querySelector(".progress-wrapper");
 const toggle = document.querySelector(".more-less");
 const icon = document.querySelector(".fa-solid");
@@ -17,6 +16,7 @@ const themeSwitcher = document.querySelector(".theme-switcher");
 const body = document.querySelector("body");
 const logo = document.querySelector("#logo");
 const theme = document.querySelector(".theme");
+const statsParagraph = document.querySelector(".stats-paragraph");
 
 let boolean = true;
 let zero = 0,
@@ -155,7 +155,13 @@ function toggleGraph() {
 
 toggle.addEventListener("click", toggleGraph);
 
+
 window.onload = () => {
   countWords();
   // sentenceCount(".");
-};
+}
+
+export {
+  wrapper,
+  statsParagraph
+}

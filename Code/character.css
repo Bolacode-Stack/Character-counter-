@@ -157,7 +157,7 @@ p {
 }
 
 .limit {
-  border: 1px solid var(--orange)
+  border: 1px solid var(--orange);
 }
 
 .limit-reached {
@@ -182,7 +182,7 @@ p {
 
 .limit-reached > * {
   font-size: var(--reg);
-  color:  var(--orange);
+  color: var(--orange);
 }
 
 .limit-reached > p {
@@ -293,9 +293,7 @@ input[type="checkbox"] {
   grid-column: 2 / -2;
   letter-spacing: -1px;
   font-size: var(--space-sm);
-}
 
-.letter-density {
   & h1 {
     font-weight: 600;
     letter-spacing: -1px;
@@ -306,6 +304,10 @@ input[type="checkbox"] {
     font-size: var(--reg);
     margin-block: 20px;
   }
+}
+
+.hide {
+  display: none;
 }
 
 .see {
@@ -331,9 +333,13 @@ input[type="checkbox"] {
 }
 
 .progress-wrapper {
-  height: 0;
+  height: 0px;
   overflow: hidden;
   transition: height 600ms ease-in-out;
+}
+
+.show {
+  height: 200px;
 }
 
 .alphabet,
@@ -355,15 +361,20 @@ input[type="checkbox"] {
   background-color: var(--neutral-800);
 }
 
- .bar {
-   width: 0%;
-    position: absolute;
-    height: var(--radius);
-    transform: translateX(0);
-    border-radius: var(--corner-full);
-    animation: move 400ms ease-in-out;
-    background-color: var(--light-purple);
-  }
+.bar {
+  width: 0%;
+  position: absolute;
+  height: var(--radius);
+  transform: translateX(0);
+  border-radius: var(--corner-full);
+  animation: move 400ms ease-in-out;
+  background-color: var(--light-purple);
+}
+
+.contents {
+  color: var(--white);
+  grid-column: 2 / -2;
+}
 
 /* light theme */
 .light-theme {

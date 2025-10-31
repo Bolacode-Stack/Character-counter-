@@ -1,3 +1,4 @@
+import { wrapper, statsParagraph } from "./counter.js";
 import { alphabetCounter } from "./counter.js";
 
 let logout;
@@ -79,11 +80,21 @@ function alphabetStats(object) {
     }, 200);
 
     progressBars.append(div, progress, letterStats);
-    progressWrapper.appendChild(progressBars);
-  });
+    let appended = progressWrapper.appendChild(progressBars);
+
+    setTimeout(() => {
+      if (appended) {
+        wrapper.classList.add("show");
+        statsParagraph.classList.add("hide")
+      } else if (!appended) {
+        wrapper.classList.remove("show");
+        statsParagraph.classList.remove("hide")
+      }
+    }, 1000);
+    });
 }
 
-function letterDensity(object)  {
+function letterDensity(object) {
   object.forEach((brace) => {
     brace["count"] = alphabetCounter(brace.alphabet);
   });
