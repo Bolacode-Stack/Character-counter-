@@ -357,13 +357,16 @@ input[type="checkbox"] {
 }
 
 .bar {
-  width: 0%;
+  width: 0;
   position: absolute;
   height: var(--radius);
   transform: translateX(0);
   border-radius: var(--corner-full);
-  animation: move 400ms ease-in-out;
   background-color: var(--light-purple);
+}
+
+.smooth {
+  transition: width 2s ease-in-out;
 }
 
 .contents {

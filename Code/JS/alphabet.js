@@ -30,6 +30,7 @@ let graph = [
   { alphabet: "z", count: 0 },
 ];
 
+let logout;
 function alphabetStats(object) {
   let bars = [];
 
@@ -53,8 +54,12 @@ function alphabetStats(object) {
 
     let bar = document.createElement("div");
     bar.className = "bar";
-    bar.style.width = `${brace.count}%`;
-    bar.classList.add("smooth");
+
+    setTimeout(() => {
+      bar.classList.add("smooth");
+      bar.style.width = `${brace.count}%`;
+    }, 1500);
+
     progress.appendChild(bar);
 
     // (3)
@@ -74,7 +79,7 @@ function alphabetStats(object) {
       if (stats == brace.count) {
         clearInterval(timerID);
       }
-    }, 200);
+    }, 100);
 
     progressBars.append(div, progress, letterStats);
     let appended = wrapper.appendChild(progressBars);
@@ -87,8 +92,12 @@ function alphabetStats(object) {
         wrapper.classList.remove("height-limit");
         statsParagraph.classList.remove("hide");
       }
-    }, 1000);
+    }, 1500);
   });
+
+  if (wrapper.innerHTML == "") {
+    toggle.remove();
+  }
 }
 
 function letterDensity(object) {
@@ -100,19 +109,16 @@ function letterDensity(object) {
 
 alphabetStats(letterDensity(graph));
 
-function toggleGraph()  {
+function toggleGraph() {
   if (parseInt(wrapper.style.height) !== wrapper.scrollHeight) {
     wrapper.style.height = wrapper.scrollHeight + "px";
     icon.classList.remove("fa-chevron-down");
     icon.classList.add("fa-chevron-up");
-  } else if ((wrapper.style.height = wrapper.scrollHeight)) {
+  } else {
     icon.classList.remove("fa-chevron-up");
     icon.classList.add("fa-chevron-down");
     wrapper.style.height = "200px";
     console.log(wrapper.style.height);
-  } else if (wrapper.style.height === "0px") {
-    wrapper.style.height = "0px";
-    toggle.removeEventListener("click", toggleGraph);
   }
 }
 
