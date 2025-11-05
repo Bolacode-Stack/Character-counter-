@@ -60,13 +60,14 @@ export function alphabetCounter(alphabet) {
 class CharacterStats {
   constructor() {
     this.loadEventListeners();
+    this.render()
   }
 
-  totalCharacters(event) {
+  totalCharacters(event) { 
     let totalCount = 0;
     let input = event.target.value;
     totalCount += input.length;
-    totalCharacters.innerText = input.length;
+    totalCharacters.innerText = totalCount;
     console.log("Total Count =", totalCount, this.countSpace());
 
     spaces.addEventListener("change", (event) => {
@@ -88,6 +89,7 @@ class CharacterStats {
       limitReached.classList.remove("show");
       characterInput.classList.remove("limit");
     }
+    this.render();
   }
 
   wordCount(event) {
@@ -96,6 +98,7 @@ class CharacterStats {
       wordMatch,
       space;
     let input = event.target.value;
+    console.log(input)
     contents.push(input);
 
     contents.forEach((word) => {
@@ -104,6 +107,7 @@ class CharacterStats {
         wordCount.innerText = count;
       }
     });
+    this.render();
   }
 
   sentenceCount(event) {
@@ -119,6 +123,7 @@ class CharacterStats {
         sentenceCount.innerText = value;
       }
     });
+    this.render();
   }
 
   countSpace() {
@@ -138,11 +143,17 @@ class CharacterStats {
     return limit;
   }
 
-  loadEventListeners() {
+  loadEventListeners()  {  
     characterInput.addEventListener("input", this.totalCharacters.bind(this));
-    limitCheck.addEventListener("change", this.setLimit.bind(this));
     characterInput.addEventListener("input", this.wordCount.bind(this));
     characterInput.addEventListener("input", this.sentenceCount.bind(this));
+    limitCheck.addEventListener("change", this.setLimit.bind(this));
+  }
+
+  render()  {
+    this.totalCharacters();
+    this.wordCount();
+    this.sentenceCount();
   }
 }
 
