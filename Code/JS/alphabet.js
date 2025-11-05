@@ -58,7 +58,7 @@ function alphabetStats(object) {
     setTimeout(() => {
       bar.classList.add("smooth");
       bar.style.width = `${brace.count}%`;
-    }, 1500);
+    }, 1000);
 
     progress.appendChild(bar);
 
@@ -92,7 +92,7 @@ function alphabetStats(object) {
         wrapper.classList.remove("height-limit");
         statsParagraph.classList.remove("hide");
       }
-    }, 3000);
+    }, 1500);
   });
 
   if (wrapper.innerHTML == "") {
@@ -101,7 +101,7 @@ function alphabetStats(object) {
 }
 
 function letterDensity(object) {
-  object.forEach((brace) => {
+  object.forEach((brace)  => {
     brace["count"] = alphabetCounter(brace.alphabet);
   });
   return object.sort((a, b) => a.count < b.count);

@@ -366,7 +366,7 @@ input[type="checkbox"] {
 }
 
 .smooth {
-  transition: width 2s ease-in-out;
+  transition: width 3s ease-in-out;
 }
 
 .contents {

@@ -44,86 +44,6 @@ function getCharacters() {
   return contents;
 }
 
-limitCheck.addEventListener("change", (event) => {
-  let isChecked = event.target.checked ? true : false;
-  if (isChecked) {
-    let limit = parseInt(limitCount.value);
-    console.log(limit);
-  }
-});
-
-function displayTotalCharacters(event) {
-  let totalCount = 0;
-  let input = event.target.value;
-  totalCharacters.innerText = input.length;
-  totalCount += input.length;
-}
-
-characterInput.addEventListener("input", displayTotalCharacters);
-
-const displayWordCount = (event)  =>  {
-  let count = 0,
-    contents = [],
-    wordMatch,
-    space;
-  let input = event.target.value;
-  contents.push(input);
-
-  contents.forEach((word) => {
-    if ((wordMatch = word.match(/\w+/g))) {
-      count += wordMatch.length;
-      wordCount.innerText = count;
-    } 
-    });
-}
-
-characterInput.addEventListener("input", displayWordCount);
-
-const displaySentenceCount = (event) => {
-  let value = 0,
-    contents = [],
-    sentenceMatch;
-  let text = event.target.value;
-  contents.push(text);
-
-  contents.forEach((sentence) => {
-    if ((sentenceMatch = sentence.match(/\.+/g))) {
-      value += sentenceMatch.length;
-      sentenceCount.innerText = value;
-    }
-  });
-};
-
-characterInput.addEventListener("input", displaySentenceCount);
-
-function countSpace() {
-  let match,
-    spaces = 0,
-    total = 20;
-  let content = getCharacters();
-  content.forEach((char) => {
-    if ((match = char.match(/\s+/g))) {
-      spaces += match.length;
-    }
-  });
-
-  let characters = total - spaces;
-  totalCharacters.innerText = characters;
-}
-
-spaces.addEventListener("change", countSpace);
-
-let timer,
-  countdown = 60;
-timer = setInterval(() => {
-  // readingTime.innerText = `${countdown--} seconds`;
-  if (countdown == zero) {
-    readingTime.innerText = "0 seconds";
-    // characterInput.value = "";
-    clearInterval(timer);
-  }
-}, time);
-
 export function alphabetCounter(alphabet) {
   let counted = zero;
   let contents = getCharacters();
@@ -137,8 +57,106 @@ export function alphabetCounter(alphabet) {
   return counted;
 }
 
-window.onload = () => {
-  // sentenceCount(".");
-};
+class CharacterStats {
+  constructor() {
+    this.loadEventListeners();
+  }
+
+  totalCharacters(event) {
+    let totalCount = 0;
+    let input = event.target.value;
+    totalCount += input.length;
+    totalCharacters.innerText = input.length;
+    console.log("Total Count =", totalCount, this.countSpace());
+
+    spaces.addEventListener("change", (event) => {
+      let isChecked = event.target.checked ? true : false;
+
+      let excludeSpaces = totalCount - this.countSpace();
+      if (!isChecked) {
+        totalCharacters.innerText = totalCount;
+      } else if (isChecked) {
+        totalCharacters.innerText = excludeSpaces;
+      }
+    });
+
+    if (totalCount >= this.setLimit()) {
+      console.log("Limit Reached");
+      limitReached.classList.add("show");
+      characterInput.classList.add("limit");
+    } else {
+      limitReached.classList.remove("show");
+      characterInput.classList.remove("limit");
+    }
+  }
+
+  wordCount(event) {
+    let count = 0,
+      contents = [],
+      wordMatch,
+      space;
+    let input = event.target.value;
+    contents.push(input);
+
+    contents.forEach((word) => {
+      if ((wordMatch = word.match(/\w+/g))) {
+        count += wordMatch.length;
+        wordCount.innerText = count;
+      }
+    });
+  }
+
+  sentenceCount(event) {
+    let value = 0,
+      contents = [],
+      sentenceMatch;
+    let text = event.target.value;
+    contents.push(text);
+
+    contents.forEach((sentence) => {
+      if ((sentenceMatch = sentence.match(/\.+/g))) {
+        value += sentenceMatch.length;
+        sentenceCount.innerText = value;
+      }
+    });
+  }
+
+  countSpace() {
+    let spaces = 0,
+      spaceMatch;
+    let content = getCharacters();
+    content.forEach((space) => {
+      if ((spaceMatch = space.match(/\s+/g))) {
+        spaces += spaceMatch.length;
+      }
+    });
+    return spaces;
+  }
+
+  setLimit() {
+    let limit = parseInt(limitCount.value);
+    return limit;
+  }
+
+  loadEventListeners() {
+    characterInput.addEventListener("input", this.totalCharacters.bind(this));
+    limitCheck.addEventListener("change", this.setLimit.bind(this));
+    characterInput.addEventListener("input", this.wordCount.bind(this));
+    characterInput.addEventListener("input", this.sentenceCount.bind(this));
+  }
+}
+
+const stats = new CharacterStats();
+
+let timer,
+  countdown = 60;
+timer = setInterval(() => {
+  // readingTime.innerText = `${countdown--} seconds`;
+  if (countdown == zero) {
+    readingTime.innerText = "0 seconds";
+    // characterInput.value = "";
+    clearInterval(timer);
+  }
+}, time);
 
 export { icon, toggle, wrapper, statsParagraph };
