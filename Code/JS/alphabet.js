@@ -92,7 +92,7 @@ function alphabetStats(object) {
         wrapper.classList.remove("height-limit");
         statsParagraph.classList.remove("hide");
       }
-    }, 1500);
+    }, 3000);
   });
 
   if (wrapper.innerHTML == "") {
