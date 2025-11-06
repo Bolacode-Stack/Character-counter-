@@ -257,7 +257,6 @@ input[type="checkbox"] {
 
 .box:nth-child(2) {
   display: flex;
-  height: 100%;
   margin-block: 1rem;
   justify-content: space-between;
   background-color: var(--yellow);
@@ -473,6 +472,10 @@ input[type="checkbox"] {
 
     .box > img {
       left: 20px;
+    }
+
+    .box {
+      height: 100%;
     }
 
     .box-contents > p {

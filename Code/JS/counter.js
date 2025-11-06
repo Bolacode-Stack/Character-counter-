@@ -1,30 +1,23 @@
 let output;
-const limitCount = document.querySelector(".limit-count");
+const limitInput = document.querySelector(".limit-count");
 const limitReached = document.querySelector(".limit-reached");
-const limitCheck = document.querySelector(".limit-check");
+const limitCheckbox = document.querySelector(".limit-check");
 const spaces = document.querySelector(".spaces");
 const sentenceCount = document.querySelector(".sentence-count");
 const characterInput = document.querySelector(".character-input");
-let totalCharacters = document.querySelector("#total-characters");
-const wordCount = document.querySelector(".word-count");
 const readingTime = document.querySelector(".reading-time");
 const wrapper = document.querySelector(".progress-wrapper");
-const contents = document.querySelector(".contents");
 const toggle = document.querySelector(".more-less");
-const bar = document.querySelectorAll(".bar");
 const icon = document.querySelector(".fa-solid");
-const themeSwitcher = document.querySelector(".theme-switcher");
-const body = document.querySelector("body");
 const logo = document.querySelector("#logo");
 const theme = document.querySelector(".theme");
 const statsParagraph = document.querySelector(".stats-paragraph");
-const checkboxContents = document.querySelectorAll(".checkbox-contents");
 
 let boolean = true;
 let zero = 0,
-  time = 50,
+time = 50,
   second = 1000;
-let string = ["Analyze your text in real-time"];
+  let string = ["Analyze your text in real-time"];
 let regex = /\w+/g;
 
 theme.addEventListener("click", (event) => {
@@ -58,21 +51,30 @@ export function alphabetCounter(alphabet) {
 }
 
 class CharacterStats {
-  constructor() {
+  constructor() {    
     this.loadEventListeners();
-    this.render()
+    this.render();
   }
+  
+  loadEventListeners() {
+    characterInput.addEventListener("input", this.totalCharacters.bind(this));
+    characterInput.addEventListener("input", this.wordCount.bind(this));
+    characterInput.addEventListener("input", this.sentenceCount.bind(this));
 
-  totalCharacters(event) { 
+    limitCheckbox.addEventListener("change", this.setLimit.bind(this))
+  }
+  
+  totalCharacters(event) {
     let totalCount = 0;
     let input = event.target.value;
     totalCount += input.length;
+    let totalCharacters = document.querySelector("#total-characters");
     totalCharacters.innerText = totalCount;
     console.log("Total Count =", totalCount, this.countSpace());
-
-    spaces.addEventListener("change", (event) => {
+    
+    spaces.addEventListener("change", (event)  => {
       let isChecked = event.target.checked ? true : false;
-
+      
       let excludeSpaces = totalCount - this.countSpace();
       if (!isChecked) {
         totalCharacters.innerText = totalCount;
@@ -80,26 +82,31 @@ class CharacterStats {
         totalCharacters.innerText = excludeSpaces;
       }
     });
-
-    if (totalCount >= this.setLimit()) {
-      console.log("Limit Reached");
+    
+    if (totalCount >= this.setLimit(event)) {
       limitReached.classList.add("show");
-      characterInput.classList.add("limit");
-    } else {
-      limitReached.classList.remove("show");
-      characterInput.classList.remove("limit");
+        characterInput.classList.add("limit");
+        console.log("Limit Reached");
+      } else if (totalCount <= this.setLimit()) {
+        limitReached.classList.remove("show");
+        characterInput.classList.remove("limit");
+      }
     }
-    this.render();
+    
+  setLimit() {
+    let limit = parseInt(limitInput.value);
+    return limit;
   }
 
   wordCount(event) {
     let count = 0,
-      contents = [],
-      wordMatch,
-      space;
+    contents = [],
+    wordMatch;
+    
     let input = event.target.value;
-    console.log(input)
     contents.push(input);
+
+    const wordCount = document.querySelector(".word-count");
 
     contents.forEach((word) => {
       if ((wordMatch = word.match(/\w+/g))) {
@@ -107,13 +114,14 @@ class CharacterStats {
         wordCount.innerText = count;
       }
     });
-    this.render();
+    return wordCount.innerText = count;
   }
-
+  
   sentenceCount(event) {
     let value = 0,
       contents = [],
       sentenceMatch;
+
     let text = event.target.value;
     contents.push(text);
 
@@ -123,12 +131,11 @@ class CharacterStats {
         sentenceCount.innerText = value;
       }
     });
-    this.render();
   }
 
   countSpace() {
     let spaces = 0,
-      spaceMatch;
+    spaceMatch;
     let content = getCharacters();
     content.forEach((space) => {
       if ((spaceMatch = space.match(/\s+/g))) {
@@ -138,22 +145,13 @@ class CharacterStats {
     return spaces;
   }
 
-  setLimit() {
-    let limit = parseInt(limitCount.value);
-    return limit;
+  reset ()  {
+    this.totalParagragh().innerText = "Total Characters";
   }
 
-  loadEventListeners()  {  
-    characterInput.addEventListener("input", this.totalCharacters.bind(this));
-    characterInput.addEventListener("input", this.wordCount.bind(this));
-    characterInput.addEventListener("input", this.sentenceCount.bind(this));
-    limitCheck.addEventListener("change", this.setLimit.bind(this));
-  }
-
-  render()  {
-    this.totalCharacters();
-    this.wordCount();
-    this.sentenceCount();
+  render() {
+    this.loadEventListeners();
+    this.loadEventListeners();
   }
 }
 
