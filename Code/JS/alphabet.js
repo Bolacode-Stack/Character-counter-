@@ -74,7 +74,7 @@ function alphabetStats(object) {
 
     let stats = 0;
     let timerID = setInterval(() => {
-      letterStats.innerText = `${stats++}(${percentage.toFixed(2)})`;
+      letterStats.innerText = ` ${stats++}(${percentage.toFixed(2)}) `;
 
       if (stats == brace.count) {
         clearInterval(timerID);
@@ -95,13 +95,13 @@ function alphabetStats(object) {
     }, 1500);
   });
 
-  if (wrapper.innerHTML == "") {
+  if (wrapper.innerHTML == "")  {
     toggle.remove();
   }
 }
 
 function letterDensity(object) {
-  object.forEach((brace)  => {
+  object.forEach((brace) => {
     brace["count"] = alphabetCounter(brace.alphabet);
   });
   return object.sort((a, b) => a.count < b.count);
