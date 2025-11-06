@@ -145,10 +145,6 @@ class CharacterStats {
     return spaces;
   }
 
-  reset ()  {
-    this.totalParagragh().innerText = "Total Characters";
-  }
-
   render() {
     this.loadEventListeners();
     this.loadEventListeners();
