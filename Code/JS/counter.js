@@ -53,8 +53,7 @@ export function alphabetCounter(alphabet) {
 class CharacterStats {
   constructor() {    
     this.loadEventListeners();
-    this.render();
-  }
+    }
   
   loadEventListeners() {
     characterInput.addEventListener("input", this.totalCharacters.bind(this));
@@ -91,6 +90,7 @@ class CharacterStats {
         limitReached.classList.remove("show");
         characterInput.classList.remove("limit");
       }
+      this.render();
     }
     
   setLimit() {
