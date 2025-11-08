@@ -57,7 +57,8 @@ function alphabetStats(object) {
 
     setTimeout(() => {
       bar.classList.add("smooth");
-      bar.style.width = `${brace.count}%`;
+      let count = Math.min(brace.count, 100);
+      bar.style.width = `${count}%`;
     }, 1500);
 
     progress.appendChild(bar);
