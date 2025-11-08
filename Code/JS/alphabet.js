@@ -1,5 +1,5 @@
-import { alphabetCounter } from "./counter.js";
-import { icon, toggle, wrapper, statsParagraph } from "./counter.js";
+import { alphabetCounter } from "./character.js";
+import { icon, toggle, wrapper, statsParagraph } from "./character.js";
 
 let graph = [
   { alphabet: "a", count: 0 },
