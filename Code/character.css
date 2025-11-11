@@ -165,7 +165,7 @@ p {
   align-items: baseline;
   justify-content: start;
   margin-top: var(--radius);
-  transform: translateY(-100%);
+  transform: translateY(100%);
   column-gap: calc(var(--reg) / 2);
 }
 
