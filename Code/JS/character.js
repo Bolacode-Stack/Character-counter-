@@ -1,16 +1,21 @@
+import Storage from "./storage.js";
+
 let output;
 const limitInput = document.querySelector(".limit-count");
 const limitReached = document.querySelector(".limit-reached");
 const limitCheckbox = document.querySelector(".limit-check");
 const spaces = document.querySelector(".spaces");
 const sentenceCount = document.querySelector(".sentence-count");
+const wordCount = document.querySelector(".word-count");
 const characterInput = document.querySelector(".character-input");
 const readingTime = document.querySelector(".reading-time");
 const wrapper = document.querySelector(".progress-wrapper");
 const toggle = document.querySelector(".more-less");
 const icon = document.querySelector(".fa-solid");
 const logo = document.querySelector("#logo");
+const body = document.querySelector("body");
 const theme = document.querySelector(".theme");
+let totalCharacters = document.querySelector("#total-characters");
 const statsParagraph = document.querySelector(".stats-paragraph");
 
 let boolean = true;
@@ -65,12 +70,16 @@ class CharacterStats {
   }
 
   totalCharacters(event) {
-    let totalCount = 0;
+    let totalCount = 0,
+      typing = true;
     let input = event.target.value;
     totalCount += input.length;
-    let totalCharacters = document.querySelector("#total-characters");
+
     totalCharacters.innerText = totalCount;
-    console.log("Total Count =", totalCount, this.countSpace());
+    console.log("Counts & Spaces =", totalCount, this.countSpace());
+
+    localStorage.clear();
+    let total = Storage.addCharactersToStorage(totalCount);
 
     spaces.addEventListener("change", (event) => {
       let isChecked = event.target.checked ? true : false;
@@ -91,6 +100,7 @@ class CharacterStats {
       limitReached.classList.remove("show");
       characterInput.classList.remove("limit");
     }
+    // this.resetUI()
   }
 
   setLimit() {
@@ -106,15 +116,15 @@ class CharacterStats {
     let input = event.target.value;
     contents.push(input);
 
-    const wordCount = document.querySelector(".word-count");
-
     contents.forEach((word) => {
       if ((wordMatch = word.match(/\w+/g))) {
         count += wordMatch.length;
         wordCount.innerText = count;
       }
+
+      let total = Storage.addWordsToStorage(count);
+      total = total.concat(count);
     });
-    return (wordCount.innerText = count);
   }
 
   sentenceCount(event) {
@@ -130,6 +140,9 @@ class CharacterStats {
         value += sentenceMatch.length;
         sentenceCount.innerText = value;
       }
+
+      let total = Storage.addSentenceToStorage(value)
+      let lastIndex = total[total.length - 1];
     });
   }
 
@@ -145,8 +158,60 @@ class CharacterStats {
     return spaces;
   }
 
+  displayTotalCharacters() {
+    let total = Storage.getCharactersFromStorage();
+    total.forEach((count) => {
+      totalCharacters.innerText = count;
+      console.log(count);
+
+      spaces.addEventListener("change", (event) => {
+        let isChecked = event.target.checked ? true : false;
+
+        let excludeSpaces = count - this.countSpace();
+        if (!isChecked) {
+          totalCharacters.innerText = count;
+        } else if (isChecked) {
+          totalCharacters.innerText = excludeSpaces;
+        }
+      });
+
+      if (count >= this.setLimit(event)) {
+        limitReached.classList.add("show");
+        characterInput.classList.add("limit");
+        console.log("Limit Reached");
+      } else if (count <= this.setLimit()) {
+        limitReached.classList.remove("show");
+        characterInput.classList.remove("limit");
+      }
+    });
+  }
+   
+  displayWordCount()  {
+    let totalWords = Storage.getWordsFromStorage();
+    totalWords.forEach((word)  =>  {
+      wordCount.innerText = word;
+    })
+  }
+
+  displaySentenceCount()  {
+    let sentence = Storage.getSentenceFromStorage();
+    sentence.forEach((value)  =>  {
+      sentenceCount.innerText  = value;
+    })
+  }
+
+  resetUI() {
+    setTimeout(() => {
+      totalCharacters.innerText = "00";
+      localStorage.removeItem("totalCharacters");
+    }, 5000);
+  }
+
   render() {
-    this.loadEventListeners();
+    // this.resetUI();
+    this.displayTotalCharacters();
+    this.displayWordCount()
+    this.displaySentenceCount()
   }
 }
 
